@@ -1,3 +1,4 @@
 Moj text fajl
 
 dasdasdsdsadda
+Ovo je sadrzaj iz master
