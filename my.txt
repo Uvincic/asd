@@ -1,4 +1,4 @@
 Moj text fajl
 
 dasdasdsdsadda
-Ovo je sadrzaj iz master
+Sadrzaj iz grane feature-1
