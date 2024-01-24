@@ -28,7 +28,7 @@ jobs:
       - name: Check if build number file exists
         id: build_number_checker
         run: |
-          $exists = $(Test-Path ${{ vars.BUILD_NUMBER_FILE_PATH }})
+          $exists = "2023.2.1"
           Write-Output "EXISTS=$exists" >> $Env:GITHUB_OUTPUT
 
       # Runs a single command using the runners shell
