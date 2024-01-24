@@ -29,7 +29,7 @@ jobs:
       - name: Check if build number file exists
         id: build_number_checker
         run: |
-          Write-Output "build_number=2023.2.1" >> $GITHUB_OUTPUT
+          Write-Output "build_number=2023.2.1" >> "$GITHUB_OUTPUT"
       - name: test
         run: |
           Write-Output "${{ steps.build_number_checker.outputs.build_number }}"
