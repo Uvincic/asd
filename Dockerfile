@@ -1,5 +1,4 @@
-FROM alpine
+FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
-RUN echo "Hello world"
+RUN Write-Output "Hello world"
 
-CMD /bin/sh
