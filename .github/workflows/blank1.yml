@@ -34,3 +34,9 @@ jobs:
       # Runs a single command using the runners shell
       - name: test
         run: Write-Output "${{ steps.build_number_checker.outputs.EXISTS }}"
+
+      - name: Print build number variable
+        run: Write-Output "${{ vars.BUILD_NUMBER }}"
+
+      - name: Change build number
+        run: gh variable set BUILD_NUMBER --body ${{ steps.build_number_checker.outputs.EXISTS }}
