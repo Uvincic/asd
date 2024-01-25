@@ -53,4 +53,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
-      - run: docker build -t ${{ needs.build.outputs.output1 }} .
+        with:
+          name: Docker
+      # - run: docker build -t ${{ needs.build.outputs.output1 }} .
