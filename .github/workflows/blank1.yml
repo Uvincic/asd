@@ -53,5 +53,5 @@ jobs:
     steps:
       - uses: actions/download-artifact@v2
         with:
-          name: my-artifact
+          name: Docker
       - run: docker build -t ${{ needs.build.outputs.output1 }} .
