@@ -42,7 +42,7 @@ jobs:
         run: Write-Output "${{ steps.build_number.outputs.EXISTS }}" 
 
       - name: Upload Dockerfile
-        uses: actions/upload-aritfact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: Docker
           path: ./Dockerfile
@@ -51,7 +51,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/download-artifact@v2
-      with:
-        name: my-artifact
-    - run: docker build -t ${{ needs.build.outputs.output1 }} .
+      - uses: actions/download-artifact@v2
+        with:
+          name: my-artifact
+      - run: docker build -t ${{ needs.build.outputs.output1 }} .
