@@ -9,5 +9,5 @@ runs:
   using: "composite"
   steps:
     - run: |
-        Get-Content ${{ inputs.varFilePath }} >> $GITHUB_ENV
+        Get-Content ${{ inputs.varFilePath }} >> $Env:GITHUB_ENV
       shell: pwsh
