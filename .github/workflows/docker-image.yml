@@ -27,4 +27,5 @@ jobs:
     - name: Pull image
       run: |
         lower=$(echo ${{ env.IMAGE_NAME }} | tr '[:upper:]' '[:lower:]')
-        docker pull $lower:${{ needs.dockerBuild.outputs.buildnumber }}
+        echo $lower
+        #docker pull $lower:${{ needs.dockerBuild.outputs.buildnumber }}
