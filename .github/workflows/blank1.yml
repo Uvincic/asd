@@ -28,15 +28,16 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      - name: Check if build number file exists
-        id: build_number_checker
+      - name: Set build number 
+        id: build_number
         run: |
           $exists = "22222"
+          Set-Content -Path ./github/variables/myvars.yml -Value "20.03.1998."
           Write-Output "EXISTS=$exists" >> $Env:GITHUB_OUTPUT
 
       # Runs a single command using the runners shell
       - name: test
-        run: Write-Output "${{ steps.build_number_checker.outputs.EXISTS }}"
+        run: Write-Output "${{ steps.build_number.outputs.EXISTS }}" 
 
       - name: Print build number variable
         run: Get-Content ./.github/workflows/blank.yml
