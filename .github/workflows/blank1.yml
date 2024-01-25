@@ -42,7 +42,7 @@ jobs:
         run: Write-Output "${{ steps.build_number.outputs.EXISTS }}" 
 
       - name: Upload Dockerfile
-        uses: actions/upload-aritfacts@v2
+        uses: actions/upload-aritfact@v2
         with:
           name: Docker
           path: ./Dockerfile
