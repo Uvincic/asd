@@ -25,4 +25,6 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Pull image
-      run: docker pull ${{ env.IMAGE_NAME }}:${{ needs.dockerBuild.outputs.buildnumber }}
+      run: |
+        lower=$(echo ${{ env.IMAGE_NAME }} | tr '[:upper:]' '[:lower:]')
+        docker pull $lower:${{ needs.dockerBuild.outputs.buildnumber }}
