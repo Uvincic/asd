@@ -32,7 +32,7 @@ jobs:
         id: build_number
         run: |
           $exists = "22222"
-          Set-Content -Path ./.github/variables/myvars.env -Value "20.03.1998."
+          Set-Content -Path ./.github/variables/myvars.env -Value "BUILD_NUMBER=20.03.1998."
           Write-Output "EXISTS=$exists" >> $Env:GITHUB_OUTPUT
 
       # Runs a single command using the runners shell
