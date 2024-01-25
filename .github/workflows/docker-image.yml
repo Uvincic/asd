@@ -25,7 +25,7 @@ jobs:
     #     username: ${{ github.actor }}
     #     password: ${{ secrets.GITHUB_TOKEN }}
     - name: Login classic
-      run: docker login -u ${{ github.actor }} -p {{ secrets.GITHUB_TOKEN }} ${{ env.REGISTRY }}
+      run: docker login ${{ env.REGISTRY }} -u ${{ github.actor }} -p {{ secrets.GITHUB_TOKEN }} 
     - name: Pull image
       run: |
         lower=$(echo ${{ env.IMAGE_NAME }} | tr '[:upper:]' '[:lower:]')
