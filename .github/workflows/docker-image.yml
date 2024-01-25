@@ -5,7 +5,10 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  
 jobs:
 
   dockerBuild:
@@ -15,6 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: dockerBuild
     steps:
-    - name: Test
-      run: echo ${{ needs.dockerBuild.outputs.buildnumber }}
-
+    - name: Log in to the Container registry
+      uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Pull image
+      run: docker pull ${{ env.IMAGE_NAME }}:${{ needs.dockerBuild.outputs.buildnumber }}
