@@ -20,7 +20,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     outputs:
-      output1: ${{ setps.build_number.outputs.EXISTS }}
+      output1: ${{ steps.build_number.outputs.EXISTS }}
     permissions: write-all
     # The type of runner that the job will run on
     runs-on: windows-2019
