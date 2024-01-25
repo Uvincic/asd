@@ -18,4 +18,6 @@ jobs:
       uses: ./.github/actions/setvars
       with:
         varFilePath: ./.github/variables/myvars.env
+    - name: Test var
+      run: Write-Output ${{ env.BUILD_NUMBER }}
 
