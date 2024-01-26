@@ -17,4 +17,6 @@ jobs:
         run: |
           lower=$(echo "testt")
           echo $lower
+      - name: test
+        run: echo $lower
 
