@@ -16,47 +16,51 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    outputs:
-      output1: ${{ steps.build_number.outputs.EXISTS }}
-    permissions: write-all
-    # The type of runner that the job will run on
+  store:
     runs-on: windows-2019
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-      
-      - name: Set build number 
-        id: build_number
+      - name: Create files
+        shell: bash
+        id: store
         run: |
-          $exists = "20.03.1998"
-          Set-Content -Path ./.github/variables/myvars.env -Value "BUILD_NUMBER=20.03.1998."
-          Write-Output "EXISTS=$exists" >> $Env:GITHUB_OUTPUT
-
-      # Runs a single command using the runners shell
-      - name: test
-        run: Write-Output "${{ steps.build_number.outputs.EXISTS }}" 
-
-      - name: Cache Dockerfile
-        uses: actions/cache@v3
+          mkdir -p 'cache_test/cache_test/subdir'
+          cd 'cache_test/cache_test/subdir'
+          echo pwd $(pwd)
+          printf '%s' "Lorem ipsum" >> a.txt
+          printf '%s' "dolor sit amet" >> b.md
+          cat a.txt b.md
+      - name: Store in cache
+        uses: actions/cache@v2
         with:
-          key: Docker
-          path: Dockerfile
-      
-  docker:
-    needs: build
-    runs-on: ubuntu-latest
+          path: |
+            cache_test/cache_test/**/*.txt
+            cache_test/cache_test/**/*.md
+          key: multiple-files-${{ hashFiles('cache_test/cache_test/**') }}
+      - name: Print files (A)
+        shell: bash
+        run: |
+          echo "Cache hit: ${{steps.store.outputs.cache-hit}}"
+          find cache_test/cache_test/subdir
+          cat cache_test/cache_test/subdir/a.txt
+          cat cache_test/cache_test/subdir/b.md
+
+
+  fetch:
+    runs-on: windows-2019
+    needs: store
     steps:
-      - uses: actions/checkout@v3
-      - name: Read cache
-        uses: actions/cache@v3
+      - name: Restore
+        uses: actions/cache@v2
         with:
-          key: Docker
-          path: Dockerfile
-      - name: Read file
-        run: cat Dockerfile
+          path: |
+            cache_test/cache_test/**/*.txt
+            cache_test/cache_test/**/*.md
+          key: multiple-files-${{ hashFiles('cache_test/cache_test/**') }}
+          restore-keys: |
+            multiple-files-${{ hashFiles('cache_test/cache_test/**') }}
+            multiple-files-
+      - name: Print files (B)
+        shell: bash
+        run: |
+          find cache_test -type f | xargs -t grep -e.
