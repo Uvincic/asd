@@ -52,7 +52,7 @@ jobs:
         uses: actions/cache@v3
         with:
           enableCrossOsArchive: true
-          path: base/cacheFile.txt
+          path: Dockerfile
           key: uros
   docker:
     needs: build
@@ -61,7 +61,9 @@ jobs:
       - name: Read cache
         uses: actions/cache@v3
         with:
-          path: base/cacheFile.txt
+          path: Dockerfile
           key: uros
       - name: Read file
-        run: pwd
+        run: |
+          pwd
+          ls
