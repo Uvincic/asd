@@ -64,9 +64,13 @@ jobs:
       - name: Read cache
         uses: actions/cache@v3
         with:
-          path: Dockerfile
+          path: |
+            Dockerfile
+            my.txt
+            .github/*
           key: uros
       - name: Read file
         run: |
           pwd
           ls
+          ls ./github
