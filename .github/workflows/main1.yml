@@ -52,14 +52,13 @@ jobs:
         uses: actions/cache@v3
         with:
           enableCrossOsArchive: true
-          key: uros
           path: base/cacheFile.txt
-      
+          key: uros
+          restore-keys: uros    
   docker:
     needs: build
-    runs-on: windows-2019
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - name: Read cache
         uses: actions/cache@v3
         with:
