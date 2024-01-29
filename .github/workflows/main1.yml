@@ -75,4 +75,4 @@ jobs:
           pwd
           ls
           ls ./github
-          gh cache list
+
