@@ -51,7 +51,7 @@ jobs:
       - name: Cache Dockerfile
         uses: actions/cache@v3
         with:
-          enableCrossOsArchive: true
+          #enableCrossOsArchive: true
           path: Dockerfile
           key: uros
   docker:
