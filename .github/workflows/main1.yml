@@ -44,6 +44,7 @@ jobs:
         id: test
         run: |
           pwd
+          ls
 
           
           
@@ -55,7 +56,7 @@ jobs:
           path: |
             Dockerfile
             my.txt
-            .github/*
+            base/*
           key: uros
   docker:
     needs: build
@@ -67,10 +68,11 @@ jobs:
           path: |
             Dockerfile
             my.txt
-            .github/*
+            base/*
           key: uros
       - name: Read file
         run: |
           pwd
           ls
           ls ./github
+          gh cache list
