@@ -51,7 +51,8 @@ jobs:
       - name: Cache Dockerfile
         uses: actions/cache@v3
         with:
-          key: test
+          enableCrossOsArchive: true
+          key: uros
           path: base/cacheFile.txt
       
   docker:
@@ -63,6 +64,6 @@ jobs:
         uses: actions/cache@v3
         with:
           path: base/cacheFile.txt
-          key: test
+          key: uros
       - name: Read file
         run: pwd
