@@ -37,14 +37,22 @@ jobs:
         id: build_number
         run: |
           pwd
+          cd base
+          pwd
+      - name: Set build number
+        shell: bash
+        id: test
+        run: |
+          pwd
+
           
           
 
       - name: Cache Dockerfile
         uses: actions/cache@v3
         with:
-          key: Docker
-          path: Dockerfile
+          key: test
+          path: base/cacheTest.txt
       
   docker:
     needs: build
@@ -54,7 +62,7 @@ jobs:
       - name: Read cache
         uses: actions/cache@v3
         with:
-          key: Docker
-          path: Dockerfile
+          path: base/cacheTest.txt
+          key: test
       - name: Read file
-        run: cat Dockerfile
+        run: pwd
