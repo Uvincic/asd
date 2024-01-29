@@ -74,5 +74,5 @@ jobs:
         run: |
           pwd
           ls
-          ls ./github
+          ls ./base
 
